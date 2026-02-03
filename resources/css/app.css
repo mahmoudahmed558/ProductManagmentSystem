@@ -1,0 +1,333 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ======================================
+   EXCEPTIONAL DESIGN SYSTEM
+   Bold, Unique Colors - Nothing Ordinary
+   ====================================== */
+
+@theme {
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ======================================
+   LIGHT MODE - Vibrant & Bold
+   ====================================== */
+:root {
+    /* Backgrounds - Soft gradients */
+    --background: #fafafa;
+    --foreground: #0a0a0a;
+    
+    /* Cards - Glass effect ready */
+    --card: rgba(255, 255, 255, 0.7);
+    --card-foreground: #1a1a1a;
+    
+    /* Popover */
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
+    
+    /* Primary - Electric Cyan to Deep Purple */
+    --primary: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+    --primary-solid: #06b6d4;
+    --primary-foreground: #ffffff;
+    
+    /* Secondary - Magenta to Orange */
+    --secondary: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+    --secondary-solid: #ec4899;
+    --secondary-foreground: #ffffff;
+    
+    /* Accent - Lime to Emerald */
+    --accent: linear-gradient(135deg, #84cc16 0%, #10b981 100%);
+    --accent-solid: #10b981;
+    --accent-foreground: #ffffff;
+    
+    /* Muted */
+    --muted: #f5f5f5;
+    --muted-foreground: #737373;
+    
+    /* Destructive - Hot Pink to Red */
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    
+    /* Borders & Inputs */
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #06b6d4;
+    
+    /* Charts - Vibrant colors */
+    --chart-1: #06b6d4; /* Cyan */
+    --chart-2: #ec4899; /* Pink */
+    --chart-3: #8b5cf6; /* Purple */
+    --chart-4: #10b981; /* Emerald */
+    --chart-5: #f59e0b; /* Amber */
+    
+    /* Radius */
+    --radius: 0.75rem;
+    
+    /* Sidebar */
+    --sidebar: rgba(255, 255, 255, 0.8);
+    --sidebar-foreground: #0a0a0a;
+    --sidebar-primary: #06b6d4;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f5f5f5;
+    --sidebar-accent-foreground: #0a0a0a;
+    --sidebar-border: #e5e5e5;
+    --sidebar-ring: #06b6d4;
+}
+
+/* ======================================
+   DARK MODE - Deep & Mysterious
+   ====================================== */
+.dark {
+    /* Backgrounds - Deep space */
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    
+    /* Cards - Glass effect */
+    --card: rgba(26, 26, 26, 0.7);
+    --card-foreground: #fafafa;
+    
+    /* Popover */
+    --popover: #171717;
+    --popover-foreground: #fafafa;
+    
+    /* Primary - Neon Cyan to Electric Purple */
+    --primary: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+    --primary-solid: #22d3ee;
+    --primary-foreground: #0a0a0a;
+    
+    /* Secondary - Hot Pink to Vibrant Orange */
+    --secondary: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+    --secondary-solid: #f472b6;
+    --secondary-foreground: #0a0a0a;
+    
+    /* Accent - Bright Lime to Teal */
+    --accent: linear-gradient(135deg, #a3e635 0%, #14b8a6 100%);
+    --accent-solid: #14b8a6;
+    --accent-foreground: #0a0a0a;
+    
+    /* Muted */
+    --muted: #262626;
+    --muted-foreground: #a3a3a3;
+    
+    /* Destructive */
+    --destructive: #f87171;
+    --destructive-foreground: #0a0a0a;
+    
+    /* Borders & Inputs */
+    --border: #262626;
+    --input: #262626;
+    --ring: #22d3ee;
+    
+    /* Charts - Neon colors */
+    --chart-1: #22d3ee; /* Neon Cyan */
+    --chart-2: #f472b6; /* Hot Pink */
+    --chart-3: #a78bfa; /* Light Purple */
+    --chart-4: #14b8a6; /* Teal */
+    --chart-5: #fbbf24; /* Yellow */
+    
+    /* Sidebar */
+    --sidebar: rgba(23, 23, 23, 0.8);
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #22d3ee;
+    --sidebar-primary-foreground: #0a0a0a;
+    --sidebar-accent: #262626;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #262626;
+    --sidebar-ring: #22d3ee;
+}
+
+/* ======================================
+   BASE STYLES
+   ====================================== */
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ======================================
+   CUSTOM UTILITY CLASSES
+   ====================================== */
+@layer utilities {
+    /* Gradient Text */
+    .text-gradient-primary {
+        @apply bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent;
+    }
+    
+    .text-gradient-secondary {
+        @apply bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent;
+    }
+    
+    .text-gradient-accent {
+        @apply bg-gradient-to-r from-lime-400 to-emerald-500 bg-clip-text text-transparent;
+    }
+    
+    /* Gradient Backgrounds */
+    .bg-gradient-primary {
+        @apply bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600;
+    }
+    
+    .bg-gradient-secondary {
+        @apply bg-gradient-to-br from-pink-500 via-rose-500 to-orange-500;
+    }
+    
+    .bg-gradient-accent {
+        @apply bg-gradient-to-br from-lime-400 via-green-500 to-emerald-500;
+    }
+    
+    /* Glass morphism */
+    .glass {
+        @apply backdrop-blur-xl bg-white/70 dark:bg-black/30 border border-white/20 dark:border-white/10;
+    }
+    
+    .glass-card {
+        @apply backdrop-blur-xl bg-white/60 dark:bg-zinc-900/60 border border-white/20 dark:border-white/10 rounded-2xl shadow-2xl;
+    }
+    
+    /* Animated gradient borders */
+    .animated-border {
+        @apply relative overflow-hidden;
+    }
+    
+    .animated-border::before {
+        content: '';
+        @apply absolute inset-0 rounded-2xl p-[2px];
+        background: linear-gradient(45deg, #06b6d4, #ec4899, #8b5cf6, #10b981);
+        background-size: 300% 300%;
+        animation: gradient-rotate 3s ease infinite;
+        @apply pointer-events-none;
+    }
+    
+    .animated-border::after {
+        content: '';
+        @apply absolute inset-[2px] bg-background rounded-[14px];
+    }
+    
+    /* Hover glow effects */
+    .hover-glow {
+        @apply transition-all duration-300;
+    }
+    
+    .hover-glow:hover {
+        @apply shadow-[0_0_30px_rgba(6,182,212,0.5)] dark:shadow-[0_0_40px_rgba(34,211,238,0.6)];
+    }
+    
+    /* Pulse animation */
+    .pulse-slow {
+        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    /* Floating animation */
+    .float {
+        animation: float 3s ease-in-out infinite;
+    }
+}
+
+/* ======================================
+   KEYFRAME ANIMATIONS
+   ====================================== */
+@keyframes gradient-rotate {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ======================================
+   COMPONENT OVERRIDES
+   ====================================== */
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-cyan-400 to-purple-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply from-cyan-300 to-purple-500;
+}
+
+/* Selection */
+::selection {
+    @apply bg-cyan-400/30 text-foreground;
+}
+
+/* Focus visible */
+*:focus-visible {
+    @apply outline-none ring-2 ring-cyan-400 ring-offset-2 ring-offset-background;
+}
