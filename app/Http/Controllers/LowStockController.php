@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class LowStockController extends Controller
 {
@@ -22,8 +21,8 @@ class LowStockController extends Controller
                     'stock' => $product->stock ?? 0,
                     'threshold' => 10, // Can be customized per product later
                     'category' => $product->category ?? 'Uncategorized',
-                    'image' => $product->featured_image 
-                        ? Storage::url($product->featured_image) 
+                    'image' => $product->featured_image
+                        ? Storage::url($product->featured_image)
                         : null,
                 ];
             });

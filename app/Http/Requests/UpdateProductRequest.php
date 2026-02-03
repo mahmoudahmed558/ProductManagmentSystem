@@ -28,7 +28,7 @@ class UpdateProductRequest extends FormRequest
             'image' => 'nullable|image|max:10240|mimes:jpg,jpeg,png,webp,gif',
             'category' => 'nullable|string|max:100',
             'stock' => 'nullable|integer|min:0',
-            'sku' => 'nullable|string|max:50|unique:products,sku,' . $this->product?->id,
+            'sku' => 'nullable|string|max:50|unique:products,sku,'.$this->product?->id,
         ];
     }
 

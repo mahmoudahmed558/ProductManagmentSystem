@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\LowStockController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LowStockController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -39,6 +39,6 @@ Route::get('reports', function () {
 
 require __DIR__.'/settings.php';
 
-//--------------------- Product Routes ---------------------//
+// --------------------- Product Routes ---------------------//
 
 Route::resource('products', ProductController::class)->middleware(['auth', 'verified']);

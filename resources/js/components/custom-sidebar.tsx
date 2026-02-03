@@ -1,15 +1,16 @@
 import { Link, usePage } from '@inertiajs/react';
-import { 
-    LayoutDashboard, 
-    Package, 
-    BarChart3, 
-    Tags, 
+import {
+    LayoutDashboard,
+    Package,
+    BarChart3,
+    Tags,
     AlertTriangle,
     FileText,
     Settings,
     ShoppingBag,
     ChevronRight,
-    X
+    X,
+    type LucideIcon,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { SharedData } from '@/types';
@@ -17,7 +18,7 @@ import type { SharedData } from '@/types';
 interface NavItem {
     title: string;
     href: string;
-    icon: any;
+    icon: LucideIcon;
     badge?: string;
 }
 
@@ -69,92 +70,98 @@ export default function CustomSidebar() {
         <>
             {/* Overlay for mobile */}
             {isOpen && (
-                <div 
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+                <div
+                    className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
                     onClick={() => setIsOpen(false)}
                 />
             )}
 
             {/* Sidebar */}
-            <aside className={`
-                fixed top-0 left-0 h-screen z-50 
-                glass-card border-r border-border
-                transition-all duration-300 ease-in-out
-                ${isOpen ? 'w-72' : 'w-0 lg:w-20'}
-                lg:relative
-            `}>
+            <aside
+                className={`glass-card fixed top-0 left-0 z-50 h-screen border-r border-border transition-all duration-300 ease-in-out ${isOpen ? 'w-72' : 'w-0 lg:w-20'} lg:relative`}
+            >
                 {/* Header */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-border">
+                <div className="flex h-16 items-center justify-between border-b border-border px-6">
                     {isOpen && (
-                        <Link href="/dashboard" className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-lg">
-                                <ShoppingBag className="w-6 h-6 text-white" />
+                        <Link
+                            href="/dashboard"
+                            className="flex items-center gap-3"
+                        >
+                            <div className="bg-gradient-primary flex h-10 w-10 items-center justify-center rounded-xl shadow-lg">
+                                <ShoppingBag className="h-6 w-6 text-white" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-xl font-black tracking-tight">
-                                    <span className="text-gradient-primary">Product</span>Hub
+                                    <span className="text-gradient-primary">
+                                        Product
+                                    </span>
+                                    Hub
                                 </span>
-                                <span className="text-[10px] text-muted-foreground font-medium">
+                                <span className="text-[10px] font-medium text-muted-foreground">
                                     Smart Inventory
                                 </span>
                             </div>
                         </Link>
                     )}
-                    
-                    <button 
+
+                    <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="lg:hidden w-8 h-8 rounded-lg hover:bg-foreground/5 flex items-center justify-center"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-foreground/5 lg:hidden"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+                <nav className="flex-1 space-y-2 overflow-y-auto p-4">
                     {navItems.map((item) => {
-                        const isActive = currentPath === item.href || currentPath.startsWith(item.href + '/');
+                        const isActive =
+                            currentPath === item.href ||
+                            currentPath.startsWith(item.href + '/');
                         const Icon = item.icon;
-                        
+
                         return (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`
-                                    flex items-center gap-3 px-4 py-3 rounded-xl font-semibold
-                                    transition-all group relative overflow-hidden
-                                    ${isActive 
-                                        ? 'bg-gradient-primary text-white shadow-lg' 
-                                        : 'hover:bg-foreground/5 text-foreground'
-                                    }
-                                    ${!isOpen && 'lg:justify-center lg:px-2'}
-                                `}
+                                className={`group relative flex items-center gap-3 overflow-hidden rounded-xl px-4 py-3 font-semibold transition-all ${
+                                    isActive
+                                        ? 'bg-gradient-primary text-white shadow-lg'
+                                        : 'text-foreground hover:bg-foreground/5'
+                                } ${!isOpen && 'lg:justify-center lg:px-2'} `}
                             >
                                 {isActive && (
-                                    <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                                    <div className="absolute inset-0 animate-pulse bg-white/20" />
                                 )}
-                                
-                                <Icon className={`w-5 h-5 flex-shrink-0 relative z-10 ${
-                                    isActive ? 'text-white' : 'text-muted-foreground group-hover:text-foreground'
-                                }`} />
-                                
+
+                                <Icon
+                                    className={`relative z-10 h-5 w-5 flex-shrink-0 ${
+                                        isActive
+                                            ? 'text-white'
+                                            : 'text-muted-foreground group-hover:text-foreground'
+                                    }`}
+                                />
+
                                 {isOpen && (
                                     <>
-                                        <span className="flex-1 relative z-10">{item.title}</span>
-                                        
+                                        <span className="relative z-10 flex-1">
+                                            {item.title}
+                                        </span>
+
                                         {item.badge && (
-                                            <span className={`
-                                                px-2 py-1 rounded-full text-xs font-bold relative z-10
-                                                ${isActive 
-                                                    ? 'bg-white/20 text-white' 
-                                                    : 'bg-orange-500/10 text-orange-600'
-                                                }
-                                            `}>
+                                            <span
+                                                className={`relative z-10 rounded-full px-2 py-1 text-xs font-bold ${
+                                                    isActive
+                                                        ? 'bg-white/20 text-white'
+                                                        : 'bg-orange-500/10 text-orange-600'
+                                                } `}
+                                            >
                                                 {item.badge}
                                             </span>
                                         )}
-                                        
+
                                         {isActive && (
-                                            <ChevronRight className="w-4 h-4 text-white relative z-10" />
+                                            <ChevronRight className="relative z-10 h-4 w-4 text-white" />
                                         )}
                                     </>
                                 )}
@@ -165,17 +172,19 @@ export default function CustomSidebar() {
 
                 {/* User Section */}
                 {isOpen && auth.user && (
-                    <div className="p-4 border-t border-border">
+                    <div className="border-t border-border p-4">
                         <Link
                             href="/settings/profile"
-                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-foreground/5 transition-all"
+                            className="flex items-center gap-3 rounded-xl p-3 transition-all hover:bg-foreground/5"
                         >
-                            <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold">
+                            <div className="bg-gradient-primary flex h-10 w-10 items-center justify-center rounded-full font-bold text-white">
                                 {auth.user.name?.charAt(0).toUpperCase() || 'U'}
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="font-semibold truncate">{auth.user.name}</div>
-                                <div className="text-xs text-muted-foreground truncate">
+                            <div className="min-w-0 flex-1">
+                                <div className="truncate font-semibold">
+                                    {auth.user.name}
+                                </div>
+                                <div className="truncate text-xs text-muted-foreground">
                                     {auth.user.email}
                                 </div>
                             </div>
@@ -188,9 +197,9 @@ export default function CustomSidebar() {
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="hidden lg:block fixed top-4 left-4 z-40 w-10 h-10 rounded-xl glass shadow-lg hover:scale-110 transition-all"
+                    className="glass fixed top-4 left-4 z-40 hidden h-10 w-10 rounded-xl shadow-lg transition-all hover:scale-110 lg:block"
                 >
-                    <ShoppingBag className="w-5 h-5 mx-auto text-cyan-500" />
+                    <ShoppingBag className="mx-auto h-5 w-5 text-cyan-500" />
                 </button>
             )}
         </>

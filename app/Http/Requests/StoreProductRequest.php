@@ -39,7 +39,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Product name is required',
-            'description.required' => 'Product description is required',  
+            'description.required' => 'Product description is required',
             'price.required' => 'Product price is required',
             'price.numeric' => 'Price must be a valid number',
             'price.min' => 'Price cannot be negative',

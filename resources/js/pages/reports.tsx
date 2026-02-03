@@ -1,28 +1,50 @@
 import { Head } from '@inertiajs/react';
+import { FileText, Download, Calendar, TrendingUp } from 'lucide-react';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
-import { FileText, Download, Calendar, TrendingUp } from 'lucide-react';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Reports', href: '/reports' },
-];
+const breadcrumbs: BreadcrumbItem[] = [{ title: 'Reports', href: '/reports' }];
 
 export default function Reports() {
     const reports = [
-        { id: 1, name: 'Monthly Sales Report', date: '2026-01-31', type: 'Sales', status: 'Ready' },
-        { id: 2, name: 'Inventory Summary', date: '2026-02-01', type: 'Inventory', status: 'Ready' },
-        { id: 3, name: 'Product Performance', date: '2026-01-28', type: 'Analytics', status: 'Ready' },
-        { id: 4, name: 'Low Stock Alert', date: '2026-02-02', type: 'Inventory', status: 'New' },
+        {
+            id: 1,
+            name: 'Monthly Sales Report',
+            date: '2026-01-31',
+            type: 'Sales',
+            status: 'Ready',
+        },
+        {
+            id: 2,
+            name: 'Inventory Summary',
+            date: '2026-02-01',
+            type: 'Inventory',
+            status: 'Ready',
+        },
+        {
+            id: 3,
+            name: 'Product Performance',
+            date: '2026-01-28',
+            type: 'Analytics',
+            status: 'Ready',
+        },
+        {
+            id: 4,
+            name: 'Low Stock Alert',
+            date: '2026-02-02',
+            type: 'Inventory',
+            status: 'New',
+        },
     ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Reports" />
-            
+
             <div className="flex h-full flex-1 flex-col gap-6 overflow-x-auto p-6">
                 {/* Header */}
                 <div>
-                    <h1 className="text-4xl font-black mb-2">
+                    <h1 className="mb-2 text-4xl font-black">
                         Business
                         <span className="text-gradient-primary"> Reports</span>
                     </h1>
@@ -32,59 +54,69 @@ export default function Reports() {
                 </div>
 
                 {/* Quick Actions */}
-                <div className="grid md:grid-cols-4 gap-4">
-                    <button className="glass-card p-6 rounded-2xl hover:scale-105 transition-all text-left">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-4">
-                            <FileText className="w-6 h-6 text-white" />
+                <div className="grid gap-4 md:grid-cols-4">
+                    <button className="glass-card rounded-2xl p-6 text-left transition-all hover:scale-105">
+                        <div className="bg-gradient-primary mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+                            <FileText className="h-6 w-6 text-white" />
                         </div>
-                        <div className="font-bold mb-1">Sales Report</div>
-                        <div className="text-sm text-muted-foreground">Revenue & orders</div>
+                        <div className="mb-1 font-bold">Sales Report</div>
+                        <div className="text-sm text-muted-foreground">
+                            Revenue & orders
+                        </div>
                     </button>
 
-                    <button className="glass-card p-6 rounded-2xl hover:scale-105 transition-all text-left">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-secondary flex items-center justify-center mb-4">
-                            <TrendingUp className="w-6 h-6 text-white" />
+                    <button className="glass-card rounded-2xl p-6 text-left transition-all hover:scale-105">
+                        <div className="bg-gradient-secondary mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+                            <TrendingUp className="h-6 w-6 text-white" />
                         </div>
-                        <div className="font-bold mb-1">Performance</div>
-                        <div className="text-sm text-muted-foreground">Product insights</div>
+                        <div className="mb-1 font-bold">Performance</div>
+                        <div className="text-sm text-muted-foreground">
+                            Product insights
+                        </div>
                     </button>
 
-                    <button className="glass-card p-6 rounded-2xl hover:scale-105 transition-all text-left">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center mb-4">
-                            <Calendar className="w-6 h-6 text-white" />
+                    <button className="glass-card rounded-2xl p-6 text-left transition-all hover:scale-105">
+                        <div className="bg-gradient-accent mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+                            <Calendar className="h-6 w-6 text-white" />
                         </div>
-                        <div className="font-bold mb-1">Monthly</div>
-                        <div className="text-sm text-muted-foreground">Full summary</div>
+                        <div className="mb-1 font-bold">Monthly</div>
+                        <div className="text-sm text-muted-foreground">
+                            Full summary
+                        </div>
                     </button>
 
-                    <button className="glass-card p-6 rounded-2xl hover:scale-105 transition-all text-left">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center mb-4">
-                            <Download className="w-6 h-6 text-white" />
+                    <button className="glass-card rounded-2xl p-6 text-left transition-all hover:scale-105">
+                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-400 to-indigo-600">
+                            <Download className="h-6 w-6 text-white" />
                         </div>
-                        <div className="font-bold mb-1">Custom</div>
-                        <div className="text-sm text-muted-foreground">Build your own</div>
+                        <div className="mb-1 font-bold">Custom</div>
+                        <div className="text-sm text-muted-foreground">
+                            Build your own
+                        </div>
                     </button>
                 </div>
 
                 {/* Recent Reports */}
-                <div className="glass-card p-6 rounded-3xl">
-                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                        <div className="w-2 h-8 bg-gradient-primary rounded-full"></div>
+                <div className="glass-card rounded-3xl p-6">
+                    <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold">
+                        <div className="bg-gradient-primary h-8 w-2 rounded-full"></div>
                         Recent Reports
                     </h2>
 
                     <div className="space-y-4">
                         {reports.map((report) => (
-                            <div 
+                            <div
                                 key={report.id}
-                                className="flex items-center gap-4 p-4 rounded-2xl glass border border-border hover:scale-[1.02] transition-all"
+                                className="glass flex items-center gap-4 rounded-2xl border border-border p-4 transition-all hover:scale-[1.02]"
                             >
-                                <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                                    <FileText className="w-7 h-7 text-white" />
+                                <div className="bg-gradient-primary flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl">
+                                    <FileText className="h-7 w-7 text-white" />
                                 </div>
 
-                                <div className="flex-1 min-w-0">
-                                    <h3 className="text-lg font-bold mb-1">{report.name}</h3>
+                                <div className="min-w-0 flex-1">
+                                    <h3 className="mb-1 text-lg font-bold">
+                                        {report.name}
+                                    </h3>
                                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                                         <span>{report.type}</span>
                                         <span>•</span>
@@ -93,16 +125,18 @@ export default function Reports() {
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    <span className={`px-4 py-2 rounded-full text-sm font-bold ${
-                                        report.status === 'New' 
-                                            ? 'bg-emerald-500/10 text-emerald-600' 
-                                            : 'bg-cyan-500/10 text-cyan-600'
-                                    }`}>
+                                    <span
+                                        className={`rounded-full px-4 py-2 text-sm font-bold ${
+                                            report.status === 'New'
+                                                ? 'bg-emerald-500/10 text-emerald-600'
+                                                : 'bg-cyan-500/10 text-cyan-600'
+                                        }`}
+                                    >
                                         {report.status}
                                     </span>
-                                    
-                                    <button className="px-6 py-3 rounded-xl bg-gradient-primary text-white font-semibold hover-glow transition-all hover:scale-105 flex items-center gap-2">
-                                        <Download className="w-4 h-4" />
+
+                                    <button className="bg-gradient-primary hover-glow flex items-center gap-2 rounded-xl px-6 py-3 font-semibold text-white transition-all hover:scale-105">
+                                        <Download className="h-4 w-4" />
                                         Download
                                     </button>
                                 </div>

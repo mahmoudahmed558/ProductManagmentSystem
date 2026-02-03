@@ -1,14 +1,12 @@
 import { Link } from '@inertiajs/react';
-import { 
-    LayoutDashboard, 
-    Package, 
-    BarChart3, 
-    Tags, 
+import {
+    LayoutDashboard,
+    Package,
+    BarChart3,
+    Tags,
     AlertTriangle,
     FileText,
     Settings,
-    TrendingUp,
-    ShoppingBag
 } from 'lucide-react';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -69,11 +67,19 @@ const footerNavItems: NavItem[] = [
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset" className="!bg-gradient-to-b !from-background !to-background/95">
+        <Sidebar
+            collapsible="icon"
+            variant="inset"
+            className="!bg-gradient-to-b !from-background !to-background/95"
+        >
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild className="hover:bg-cyan-500/10 transition-all">
+                        <SidebarMenuButton
+                            size="lg"
+                            asChild
+                            className="transition-all hover:bg-cyan-500/10"
+                        >
                             <Link href={dashboard()} prefetch>
                                 <AppLogo />
                             </Link>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -27,7 +26,7 @@ class CategoryController extends Controller
                     'from-yellow-400 to-amber-500',
                     'from-fuchsia-400 to-pink-600',
                 ];
-                
+
                 return [
                     'id' => $index + 1,
                     'name' => $item->category,
@@ -39,8 +38,8 @@ class CategoryController extends Controller
         $stats = [
             'totalCategories' => $categories->count(),
             'totalProducts' => Product::whereNotNull('category')->count(),
-            'avgPerCategory' => $categories->count() > 0 
-                ? round(Product::whereNotNull('category')->count() / $categories->count(), 1) 
+            'avgPerCategory' => $categories->count() > 0
+                ? round(Product::whereNotNull('category')->count() / $categories->count(), 1)
                 : 0,
         ];
 

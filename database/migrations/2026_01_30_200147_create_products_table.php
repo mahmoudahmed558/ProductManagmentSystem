@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use phpDocumentor\Reflection\Types\Nullable;
 
 return new class extends Migration
 {
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price',10,2)->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->string('featured_image')->nullable();
             $table->string('featured_image_original_name')->nullable();
             $table->timestamps();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AnalyticsController extends Controller
@@ -18,7 +17,7 @@ class AnalyticsController extends Controller
         // Monthly revenue data (last 12 months - simulated for now)
         $monthlyRevenue = [];
         $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        
+
         for ($i = 0; $i < 12; $i++) {
             $monthlyRevenue[] = [
                 'month' => $months[$i],
@@ -42,14 +41,14 @@ class AnalyticsController extends Controller
                     'from-purple-400 to-indigo-600',
                     'from-emerald-400 to-green-600',
                 ];
-                
+
                 $maxCount = Product::selectRaw('category, COUNT(*) as count')
                     ->whereNotNull('category')
                     ->groupBy('category')
                     ->orderByDesc('count')
                     ->first()
                     ->count ?? 1;
-                
+
                 return [
                     'name' => $item->category,
                     'value' => round(($item->count / $maxCount) * 100, 0),
@@ -60,13 +59,13 @@ class AnalyticsController extends Controller
 
         // Best selling product
         $bestProduct = Product::orderByDesc('price')->first();
-        
+
         // Performance summary
         $performance = [
             'bestSellingProduct' => $bestProduct?->name ?? 'N/A',
             'bestSellingCount' => rand(100, 200),
             'peakSalesDay' => 'Saturday',
-            'peakRevenue' => '$' . number_format(rand(7000, 10000), 0),
+            'peakRevenue' => '$'.number_format(rand(7000, 10000), 0),
             'growthRate' => '+24.5%',
         ];
 

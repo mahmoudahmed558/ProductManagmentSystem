@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -29,8 +28,8 @@ class DashboardController extends Controller
             ->first();
 
         // Average product value
-        $avgValue = $stats['totalProducts'] > 0 
-            ? round($stats['totalValue'] / $stats['totalProducts'], 2) 
+        $avgValue = $stats['totalProducts'] > 0
+            ? round($stats['totalValue'] / $stats['totalProducts'], 2)
             : 0;
 
         // Weekly data for chart (last 7 days)
@@ -41,7 +40,7 @@ class DashboardController extends Controller
             $weeklyData[] = [
                 'day' => $date->format('D'),
                 'count' => $count,
-                'percentage' => $stats['totalProducts'] > 0 ? round(($count / $stats['totalProducts']) * 100, 1) : 0
+                'percentage' => $stats['totalProducts'] > 0 ? round(($count / $stats['totalProducts']) * 100, 1) : 0,
             ];
         }
 

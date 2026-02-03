@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -21,10 +21,10 @@ class ProductController extends Controller
         // Search functionality
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('sku', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('sku', 'like', "%{$search}%");
             });
         }
 
@@ -36,6 +36,7 @@ class ProductController extends Controller
         // Get paginated products
         $products = $query->latest()->paginate(12)->through(function ($product) {
             $product->featured_image = $product->featured_image ? Storage::url($product->featured_image) : null;
+
             return $product;
         });
 
@@ -45,7 +46,7 @@ class ProductController extends Controller
         return Inertia::render('products/index', [
             'products' => $products,
             'categories' => $categories,
-            'filters' => $request->only(['search', 'category'])
+            'filters' => $request->only(['search', 'category']),
         ]);
     }
 
@@ -63,11 +64,11 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $validated = $request->validated();
-        
+
         $image = null;
         $imageName = null;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $imageName = $file->getClientOriginalName();
             $image = $file->store('products', 'public');
@@ -84,10 +85,10 @@ class ProductController extends Controller
             'featured_image_original_name' => $imageName,
         ]);
 
-        if($product){
+        if ($product) {
             return redirect()->route('products.index')->with('success', 'Product created successfully.');
         }
-        
+
         return redirect()->route('products.create')->with('error', 'Product creation failed.');
     }
 
@@ -105,7 +106,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $product->featured_image = $product->featured_image ? Storage::url($product->featured_image) : null;
-        return Inertia::render("products/product-form", ['product' => $product]);
+
+        return Inertia::render('products/product-form', ['product' => $product]);
     }
 
     /**
@@ -114,17 +116,17 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $validated = $request->validated();
-        
+
         $image = $product->featured_image;
         $imageName = $product->featured_image_original_name;
 
         // Handle new image upload
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             // Delete old image if exists
-            if($product->featured_image && Storage::disk('public')->exists($product->featured_image)){
+            if ($product->featured_image && Storage::disk('public')->exists($product->featured_image)) {
                 Storage::disk('public')->delete($product->featured_image);
             }
-            
+
             $file = $request->file('image');
             $imageName = $file->getClientOriginalName();
             $image = $file->store('products', 'public');
@@ -149,16 +151,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if($product){
+        if ($product) {
             // Delete image if exists
-            if($product->featured_image && Storage::disk('public')->exists($product->featured_image)){
+            if ($product->featured_image && Storage::disk('public')->exists($product->featured_image)) {
                 Storage::disk('public')->delete($product->featured_image);
             }
-            
+
             $product->delete();
+
             return redirect()->back()->with('success', 'Product deleted successfully.');
         }
-        
+
         return redirect()->back()->with('error', 'Product deletion failed.');
     }
 }
